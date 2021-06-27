@@ -1,0 +1,95 @@
+#: import NoTransition kivy.uix.screenmanager.NoTransition
+<SetUp@Screen>
+<Main@Screen>
+ScreenManager:
+    transition: NoTransition()
+    SetUp:
+    Main:
+<Setup>:
+    name: 'SCRN_Setup'
+    md_bg_color : [124/255, 130/255, 136/255, 1]
+    MDCard:
+        size_hint: None, None
+        size: 570, 450
+        pos_hint: {"center_x":.5, "center_y": .5}
+        elevation: 70
+        md_bg_color: [18/255, 18/255, 18/255, 1]
+        padding: 1
+        spacing: 30
+        orientation: 'vertical'
+        border_radius: 20
+        radius: [15]
+        # Adding items to card
+        MDLabel:
+            text: "Device Setup"
+            theme_text_color: 'Custom'
+            text_color: 1,1,1,1
+            font_style: 'H6'
+            font_size: 55
+            halign : "center"
+            size_hint_y: 0.1
+            height: self.texture_size[1]
+            padding_y: 15
+        MDTextFieldRound:
+            hint_text: "Full name"
+            font_style: 'subtitle2'
+            icon_right: 'account'
+            size_hint_x: None
+            max_height: "500dp"
+            width: 310
+            font_size: 32
+            pos_hint: {'center_x':.5}
+            normal_color: 176/255, 179/255, 184/255, 1
+            color_active: [1,1,1,1]
+            id: full_name
+
+        MDTextFieldRound:
+            hint_text: "Security PIN"
+            font_style: 'subtitle2'
+            icon_right: 'eye-off'
+            size_hint_x: None
+            width: 310
+            font_size: 30
+            pos_hint: {"center_x":.5}
+            password: True
+            id: user_pin
+        Widget: #makes all contents inside of MDCard go up by 30
+            size_hint_y: None
+            height: 10
+        MDFillRoundFlatButton:
+            id: BTN_Continue
+            text: "Continue"
+            size_hint: 0.24, 0.03
+            pos_hint:{"center_x":0.85, "center_y":0.4}
+            font_size: "20sp"
+            ripple_scale: 0.5
+            disabled: True if user_pin.text == "" else False
+            on_release: app.continue_to_main()
+        Widget: #makes all contents inside of MDCard go up by 30
+            size_hint_y: None
+            height: 1
+
+<Main>:
+    name: "SCRN_Main"
+    canvas:
+        Rectangle:
+            source: 'background_geo.jpg'
+            size: self.size
+            pos: self.pos
+    MDLabel:
+        id: user_greeting
+        text: ""
+        font_style: "H6"
+        font_size: 60
+        pos_hint: {"center_x": 0.54, "center_y": 0.9}
+        markup: True
+    MDIconButton:
+        icon: 'icon_bluetooth.png'
+        pos_hint:{"center_x":0.6, "center_y":0.7}
+        user_font_size: "100sp"
+
+
+
+
+
+
